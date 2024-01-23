@@ -42,4 +42,4 @@ set num 0; while \{$num ^ 7\} \{if \{$num & 1\} \{puts "\[incr num\]. Text..."\}
 
 expr \{\[string is digit -strict $num\] && $num > 0 && $num <= 85 \|\| \[set num 85\]\}
 
-https://vanderburg.org/old\_pages/Tcl/war/0000.html
+https://vanderburg.org/old_pages/Tcl/war/0000.html
