@@ -1,0 +1,46 @@
+
+
+sudo apt install tcl-dev tk-dev
+Then login as untrusted user without privileges.
+
+mkdir ~/del
+cd ~/del
+git clone --depth 1 https://github.com/RubyLane/parse_args
+cd parse_args
+git clone --depth 1  https://github.com/tcltk/tclconfig
+   OR wget https://core.tcl-lang.org/tclconfig/tarball/main/tclconfig.tar.gz -O - | tar xz
+git clone --depth 1 https://github.com/cyanogilvie/teabase
+autoconf
+./configure
+make
+# make install
+Don't install untrusted programs with 'make install', just put 2 files libparse_args0.5.1.so and pkgIndex.tcl
+in the directory in home, like MyTclPkgs/parse_args0.5.1/, directory must be named after the file .so,
+if the file is 'libparse_args0.5.1.so', then the directory must be parse_args0.5.1,
+then add that directory to auto_path in tcl
+
+ls ~/MyTclPkgs/parse_args0.5.1/
+libparse_args0.5.1.so pkgIndex.tcl
+
+cd ~/MyTclPkgs/parse_args0.5.1/
+chmod 644 libparse_args0.5.1.so
+strip --strip-all libparse_args0.5.1.so
+CHECK the file with https://www.virustotal.com/gui/home/upload
+
+In tcl
+set auto_path [linsert $auto_path 0 "~/MyTclPkgs"]
+package require parse_args
+
+OR
+
+set auto_path [linsert $auto_path 0 "${env(HOME)}/MyTclPkgs"]
+package require parse_args
+
+OR
+
+set myTclPkgs [file normalize {~/MyTclPkgs}]
+if {[file exists $myTclPkgs] && $myTclPkgs ni $auto_path} {
+  lappend ::auto_path $myTclPkgs
+}
+unset myTclPkgs
+
