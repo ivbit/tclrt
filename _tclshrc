@@ -1,0 +1,33 @@
+
+
+# Adding a custom directory with tcl packages to 'auto_path'.
+set myTclPkgs [file normalize {~/MyTclPkgs}]
+if {[file exists $myTclPkgs] && $myTclPkgs ni $auto_path} {
+  lappend ::auto_path $myTclPkgs
+}
+unset myTclPkgs
+
+# The tclreadline package makes the 'GNU readline' available to the Tcl.
+
+# sudo apt install tcl-tclreadline
+
+# Usage:
+# Place the 'if' command from below into .tclshrc, or .wishrc in home directory.
+
+# Non-printable control characters as color control characters must be enclosed
+# between literal <C-A> and <C-B> to tell readline the length printable prompt.
+if {$tcl_interactive && {tclreadline} ni [package names]} {
+  package require tclreadline
+  namespace eval tclreadline {
+    proc prompt1 {} {return "\001\033\[1;38;5;28m\002tcl\001\033\[0m\002% "}
+    proc prompt2 {} {return "\001\033\[38;5;166m\002>\001\033\[0m\002 "}
+    set historyLength 999
+  }
+  ::tclreadline::Loop
+}
+
+# You can access your Tcl command line history using vi or emacs-style
+# keystrokes by creating a .inputrc file in your home directory and putting
+# a line it it that says "set editing-mode vi" or "set editing-mode emacs".
+
+
