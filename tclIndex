@@ -1,0 +1,9 @@
+# Tcl autoload index file, version 2.0
+# -*- tcl -*-
+# vim:filetype=tcl
+
+::set ::auto_index(clear) {::proc ::clear {} {::chan puts -nonewline stderr "\u001b\[3J\u001b\[1;1H\u001b\[0J"}}
+::set ::auto_index(cls)   {::proc ::cls {} {::chan puts -nonewline stderr "\u001b\[3J\u001b\[1;1H\u001b\[0J"}}
+::set ::auto_index(eche)  {::proc ::eche {args} {::chan puts stderr $args}}
+::set ::auto_index(echo)  {::proc ::echo {args} {::chan puts stdout $args}}
+

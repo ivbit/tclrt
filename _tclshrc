@@ -1,0 +1,47 @@
+::apply {
+  {}
+  {
+    # Adding a custom directory with tcl modules to module search path.
+    ::set MyTclPkgs {~/MyTclPkgs}
+    ::if {[::package vsatisfies [::info tclversion] 9-]} then {
+      ::set MyTclPkgs [::file normalize [::file tildeexpand $MyTclPkgs]]
+    } else {
+      ::set MyTclPkgs [::file normalize $MyTclPkgs]
+    }
+    ::if {[::file exists $MyTclPkgs]} then {
+      ::tcl::tm::path add $MyTclPkgs
+    }
+    # Adding a custom directory with tcl packages to '$::auto_path'.
+    ::set MyTclPkgs {~/MyTclPkgs}
+    ::if {[::package vsatisfies [::info tclversion] 9-]} then {
+      ::set MyTclPkgs [::file normalize [::file tildeexpand $MyTclPkgs]]
+    } else {
+      ::set MyTclPkgs [::file normalize $MyTclPkgs]
+    }
+    ::if {[::file exists $MyTclPkgs] && $MyTclPkgs ni $::auto_path} then {
+      ::set ::auto_path [::linsert $::auto_path 0 $MyTclPkgs]
+    }
+    ::return
+  }
+}
+::if {$::tcl_interactive && [::catch {::package present tclreadline}]} then {
+  ::if {[::catch {::package require tclreadline}]} then {::return}
+  ::proc ::tclreadline::prompt1 {} {::return "\u0001\u001b\[1;38;5;28m\u0002tcl\u0001\u001b\[0m\u0002% "}
+  ::proc ::tclreadline::prompt2 {} {::return "\u0001\u001b\[38;5;166m\u0002>\u0001\u001b\[0m\u0002 "}
+  ::set ::tclreadline::historyLength 999
+  ::tclreadline::Loop
+}
+::return
+
+# \
+The 'tclreadline' package makes the 'GNU readline' available to the Tcl. \
+sudo apt install tcl-tclreadline \
+Usage: \
+Place 'if' command from above in '.tclshrc' or '.wishrc' in home directory. \
+Non-printable control characters as color control characters must be \
+enclosed between literal '<Ctrl-A>' and '<Ctrl-B>' to tell 'readline' the \
+length of printable prompt. \
+You can access Tcl command line history using 'vi-style' or 'emacs-style' \
+keystrokes by creating an '.inputrc' file in your home directory and putting \
+a line in it that says 'set editing-mode vi' or 'set editing-mode emacs'.
+
