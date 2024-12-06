@@ -1,0 +1,37 @@
+
+
+https://core.tcl-lang.org/tcllib/doc/trunk/embedded/index.md
+https://fossil-scm.org/home/doc/trunk/www/index.wiki
+https://pikchr.org/home/doc/trunk/homepage.md
+https://www.sqlite.org/index.html
+
+Embedded project documentation:
+common part is '/home/doc/trunk/'.
+https://fossil-scm.org/home/doc/trunk/www/permutedindex.html
+
+Files:
+common part is '/home/dir?ci=trunk'.
+https://fossil-scm.org/home/dir?ci=trunk
+
+https://fossil-scm.org/forum/forumpost/56ae6b7a6bc935c6
+
+Fossil developers have moved from the 'wiki' to 'embedded project documentation',
+and from 'tickets' to the 'forum'.
+
+https://fossil-scm.org/forum/forumpost/f9963149a311944b
+
+The ability to apply attachments is a 'historical' one - it was derived from
+Fossil's spiritual ancestor, CVSTrac, which provided the initial baseline of
+functionality fossil aimed to include. Even before fossil got 'embedded docs',
+attachments were not a feature we made any significant use outside of tickets,
+so they have not been really be touched in all these years.
+And we now prefer the forum to the ticket tracker except in rare cases where
+specific problems needs to be formally recorded (which is exceedingly rare in
+this project, but happens now and then in Fossil's sibling project, SQLite).
+
+BookT page 223:
+9.4. Встроенная документация
+
+Modern default menu looks like:
+Home Timeline Docs Files Forum Download
+
