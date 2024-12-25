@@ -1,0 +1,33 @@
+#! /bin/sh
+# launch \
+exec tclsh "$0" -verbose 'p'
+# exec tclsh "$0" -skip '*err*' -verbose 'p'
+# exec tclsh "$0" -match '*err*' -verbose 'p'
+
+package require tcltest
+namespace import tcltest::test
+
+test incr-1.0 {
+  Verify default increment of 1, the new value is returned and stored.
+} -setup {
+  set i 1
+} -body {
+  list [incr i] $i
+} -cleanup {
+  unset i
+} -result {2 2}
+
+test incr-err-1.0 {
+  Verify non-integer variable generate an error.
+} -setup {
+  set i notAnInteger
+} -body {
+  incr i
+} -cleanup {
+  unset i
+} -returnCodes error -result {expected integer.*notAnInteger} -match regexp
+
+tcltest::cleanupTests
+
+# END OF SCRIPT
+

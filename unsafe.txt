@@ -1,0 +1,37 @@
+# vim:ft=tcl
+interp create -safe safeInterpreter
+# These commands are hidden in a safe interpreter:
+auto_execok
+auto_import
+auto_load
+auto_load_index
+auto_qualify
+cd
+encoding
+exec
+exit
+fconfigure
+chan configure
+file
+glob
+history
+load
+LoadBLT25
+open
+pkg_mkIndex
+pwd
+socket
+source
+tclLog
+tclPkgSetup
+tclPkgUnknown
+unknown
+_unknown
+unload
+
+# https://stackoverflow.com/questions/76453132/how-to-hide-a-command-not-disable-in-tclsh
+# The fact that commands have to be in the global namespace when hidden is a
+# very ugly misfeature that was a hack to work around a bug found late in the
+# 8.0 (!) release cycle. It's never been a high enough priority thing to put
+# effort into fixing after that.
+
